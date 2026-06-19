@@ -2,11 +2,11 @@ import React from 'react';
 
 function App() {
   // ==========================================
-  // 1. DATA PORTOFOLIO RESMI (GALANG EGA YUDISTIRA)
+  // DATA PORTOFOLIO RESMI (GALANG EGA YUDISTIRA)
   // ==========================================
   const PROFILE = {
     nama: "Galang Ega Yudistira",
-    peran: "Teknologi Informasi Student & Developer",
+    peran: "IT Student & Developer",
     alamat: "Malang, Indonesia",
     phone: "082120026900",
     email: "galangega07@gmail.com",
@@ -24,7 +24,7 @@ function App() {
   const PENGALAMAN = [
     {
       id: 1,
-      tahun: "10 Juli 2025 – Juli 2026",
+      tahun: "Juli 2025 – Juli 2026",
       perusahaan: "Critasena Cafe",
       posisi: "Barista",
       tugas: [
@@ -38,18 +38,18 @@ function App() {
     },
     {
       id: 2,
-      tahun: "Desember 2024 – April 2025",
+      tahun: "Des. 2024 – April 2025",
       perusahaan: "Costslice",
       posisi: "Kitchen Staff & Server",
       tugas: [
-        "Kitchen Staff (1 bulan) & Server (3 bulan).",
+        "Berperan sebagai Kitchen Staff selama 1 bulan dan Server selama 3 bulan.",
         "Melayani pelanggan dengan baik dan menjaga kualitas pelayanan.",
         "Bekerja sama dengan tim operasional untuk memastikan kelancaran layanan."
       ]
     },
     {
       id: 3,
-      tahun: "Juli 2023 – Desember 2023",
+      tahun: "Juli 2023 – Des. 2023",
       perusahaan: "PT PLN Icon Plus",
       posisi: "Marketing Intern",
       tugas: [
@@ -63,73 +63,580 @@ function App() {
   const PROYEK = [
     {
       id: 1,
-      judul: "Implementasi IoT dan Cloud Monitoring",
-      deskripsi: "Menghubungkan perangkat IoT dengan layanan cloud menggunakan VPS dan WireGuard. Membangun dashboard monitoring yang dapat diakses melalui jaringan publik serta mengimplementasikan pertukaran data antara perangkat IoT dan cloud server.",
+      judul: "IoT & Cloud Monitoring",
+      deskripsi: "Menghubungkan perangkat IoT dengan layanan cloud menggunakan VPS dan WireGuard. Membangun dashboard monitoring yang dapat diakses melalui jaringan publik serta mengimplementasikan pertukaran data.",
       tech: ["IoT", "Cloud Server", "VPS", "WireGuard"]
     },
     {
       id: 2,
-      judul: "Website Monitoring Berbasis Laravel",
+      judul: "Web Monitoring Laravel",
       deskripsi: "Mengembangkan aplikasi web menggunakan Laravel untuk mengelola data dan menampilkan informasi monitoring secara real-time, serta melakukan proses deployment aplikasi ke server cloud.",
-      tech: ["Laravel", "PHP", "Cloud Deployment", "Real-time Data"]
+      tech: ["Laravel", "PHP", "Cloud", "Real-time"]
     }
   ];
 
   return (
-    <div style={styles.wrapper}>
-      {/* HEADER / NAVBAR (Logo Inisial GEY Sudah Dihilangkan) */}
-      <nav style={styles.navbar}>
-        <div style={styles.navLinks}>
-          <a href="#about" style={styles.navLink}>Tentang</a>
-          <a href="#education" style={styles.navLink}>Pendidikan</a>
-          <a href="#experience" style={styles.navLink}>Pengalaman</a>
-          <a href="#projects" style={styles.navLink}>Proyek</a>
-          <a href="#contact" style={styles.navLink}>Kontak</a>
+    <>
+      <style>{`
+        /* Import Google Font Premium */
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+        :root {
+          --bg-color: #fafafa;
+          --surface: #ffffff;
+          --text-main: #171717;
+          --text-muted: #525252;
+          --text-light: #a3a3a3;
+          --accent-1: #4f46e5; /* Indigo */
+          --accent-2: #7c3aed; /* Violet */
+          --border: #f0f0f0;
+          --border-hover: #e5e5e5;
+        }
+        
+        * {
+          box-sizing: border-box;
+          scroll-behavior: smooth;
+          margin: 0;
+          padding: 0;
+        }
+
+        body {
+          font-family: 'Plus Jakarta Sans', sans-serif;
+          background-color: var(--bg-color);
+          color: var(--text-main);
+          line-height: 1.7;
+          overflow-x: hidden;
+        }
+
+        /* Layout */
+        .container {
+          max-width: 900px;
+          margin: 0 auto;
+          padding: 0 24px;
+        }
+
+        .section {
+          padding: 100px 0;
+        }
+
+        /* Ambient Background Glow */
+        .ambient-glow {
+          position: absolute;
+          top: -150px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 80vw;
+          height: 600px;
+          background: radial-gradient(ellipse at top, rgba(79, 70, 229, 0.08), transparent 60%);
+          z-index: -1;
+          pointer-events: none;
+        }
+
+        /* Navbar Glassmorphism */
+        .navbar {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          padding: 24px 0;
+          background: rgba(250, 250, 250, 0.7);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border-bottom: 1px solid rgba(240, 240, 240, 0.8);
+          z-index: 1000;
+        }
+
+        .nav-content {
+          display: flex;
+          justify-content: flex-end;
+          gap: 36px;
+        }
+
+        .nav-link {
+          color: var(--text-muted);
+          text-decoration: none;
+          font-size: 0.9rem;
+          font-weight: 600;
+          letter-spacing: 0.3px;
+          transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+          color: var(--text-main);
+        }
+
+        /* Hero Section */
+        .hero {
+          min-height: 100vh;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding-top: 60px;
+          position: relative;
+        }
+
+        .status-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 8px 16px;
+          background: var(--surface);
+          border: 1px solid var(--border);
+          border-radius: 100px;
+          font-size: 0.8rem;
+          font-weight: 600;
+          color: var(--text-muted);
+          margin-bottom: 32px;
+          width: max-content;
+          box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+        }
+
+        .status-dot {
+          width: 8px;
+          height: 8px;
+          background-color: #10b981;
+          border-radius: 50%;
+          box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+          animation: pulse 2s infinite;
+        }
+
+        .hero-title {
+          font-size: clamp(3.2rem, 8vw, 5.5rem);
+          font-weight: 800;
+          line-height: 1.05;
+          margin: 0 0 16px 0;
+          letter-spacing: -2.5px;
+          color: var(--text-main);
+        }
+
+        .hero-subtitle {
+          font-size: clamp(1.2rem, 3vw, 2rem);
+          font-weight: 500;
+          background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          margin: 0 0 24px 0;
+          letter-spacing: -0.5px;
+        }
+
+        .hero-desc {
+          font-size: 1.1rem;
+          color: var(--text-muted);
+          max-width: 650px;
+          margin-bottom: 48px;
+          line-height: 1.8;
+          text-align: justify;
+        }
+
+        /* Buttons */
+        .btn-group {
+          display: flex;
+          gap: 16px;
+          flex-wrap: wrap;
+        }
+
+        .btn {
+          padding: 16px 32px;
+          border-radius: 12px;
+          font-weight: 600;
+          font-size: 0.95rem;
+          text-decoration: none;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .btn-primary {
+          background-color: var(--text-main);
+          color: white;
+        }
+
+        .btn-primary:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 10px 25px -5px rgba(23, 23, 23, 0.3);
+        }
+
+        .btn-primary:hover .arrow-icon {
+          transform: translateX(4px);
+        }
+
+        .btn-secondary {
+          background-color: var(--surface);
+          color: var(--text-main);
+          border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+          background-color: var(--bg-color);
+          border-color: var(--text-muted);
+          transform: translateY(-3px);
+        }
+
+        .arrow-icon {
+          transition: transform 0.3s ease;
+        }
+
+        /* Section Header */
+        .section-header {
+          margin-bottom: 60px;
+        }
+
+        .section-num {
+          font-size: 1rem;
+          font-weight: 700;
+          color: var(--text-light);
+          margin-bottom: 8px;
+          display: block;
+          letter-spacing: 2px;
+        }
+
+        .section-title {
+          font-size: 2.2rem;
+          font-weight: 800;
+          letter-spacing: -1px;
+          color: var(--text-main);
+        }
+
+        /* Premium Timeline */
+        .timeline-wrapper {
+          border-left: 2px solid var(--border);
+          padding-left: 40px;
+          margin-left: 10px;
+        }
+
+        .timeline-item {
+          position: relative;
+          margin-bottom: 48px;
+        }
+
+        .timeline-item:last-child {
+          margin-bottom: 0;
+        }
+
+        .timeline-dot {
+          position: absolute;
+          left: -47px;
+          top: 6px;
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          background: var(--surface);
+          border: 2px solid var(--accent-1);
+          box-shadow: 0 0 0 4px var(--bg-color);
+        }
+
+        .timeline-date {
+          font-family: monospace;
+          font-size: 0.9rem;
+          color: var(--text-light);
+          margin-bottom: 8px;
+          letter-spacing: 0.5px;
+        }
+
+        .timeline-content {
+          background: var(--surface);
+          border: 1px solid var(--border);
+          border-radius: 20px;
+          padding: 32px;
+          transition: all 0.4s ease;
+        }
+
+        .timeline-content:hover {
+          border-color: var(--border-hover);
+          box-shadow: 0 20px 40px -10px rgba(0,0,0,0.04);
+          transform: translateY(-2px);
+        }
+
+        .timeline-title {
+          font-size: 1.3rem;
+          font-weight: 700;
+          margin-bottom: 4px;
+        }
+
+        .timeline-subtitle {
+          font-size: 1rem;
+          color: var(--accent-1);
+          font-weight: 600;
+          margin-bottom: 16px;
+        }
+
+        .timeline-list {
+          padding-left: 18px;
+          color: var(--text-muted);
+          font-size: 0.95rem;
+        }
+
+        .timeline-list li {
+          margin-bottom: 8px;
+        }
+
+        /* Project Cards */
+        .project-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+          gap: 24px;
+        }
+
+        .project-card {
+          background: var(--surface);
+          border: 1px solid var(--border);
+          border-radius: 24px;
+          padding: 40px;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .project-card:hover {
+          border-color: rgba(79, 70, 229, 0.3);
+          box-shadow: 0 20px 40px -10px rgba(79, 70, 229, 0.08);
+          transform: translateY(-5px);
+        }
+
+        .project-icon {
+          width: 48px;
+          height: 48px;
+          background: #f5f3ff;
+          color: var(--accent-1);
+          border-radius: 14px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 24px;
+        }
+
+        .project-title {
+          font-size: 1.4rem;
+          font-weight: 700;
+          margin-bottom: 12px;
+          letter-spacing: -0.5px;
+        }
+
+        .project-desc {
+          color: var(--text-muted);
+          font-size: 0.95rem;
+          margin-bottom: 32px;
+          flex-grow: 1;
+        }
+
+        .tech-stack {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+        }
+
+        .tech-tag {
+          font-size: 0.8rem;
+          font-weight: 600;
+          color: var(--text-main);
+          background: var(--bg-color);
+          border: 1px solid var(--border);
+          padding: 6px 14px;
+          border-radius: 100px;
+        }
+
+        /* NEW BENTO GRID CONTACT SECTION */
+        .bento-contact-grid {
+          display: grid;
+          grid-template-columns: 1.2fr 1fr;
+          gap: 24px;
+        }
+
+        .bento-main-card {
+          background: var(--surface);
+          border: 1px solid var(--border);
+          border-radius: 24px;
+          padding: 40px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          transition: all 0.4s ease;
+        }
+
+        .bento-main-card:hover {
+          border-color: rgba(79, 70, 229, 0.3);
+          box-shadow: 0 20px 40px -10px rgba(79, 70, 229, 0.08);
+        }
+
+        .bento-main-card h4 {
+          font-size: 2rem;
+          font-weight: 800;
+          margin-bottom: 16px;
+          letter-spacing: -1px;
+        }
+
+        .bento-main-card p {
+          color: var(--text-muted);
+          font-size: 1.05rem;
+          margin-bottom: 32px;
+        }
+
+        .bento-details {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+        }
+
+        .bento-item {
+          background: var(--surface);
+          border: 1px solid var(--border);
+          border-radius: 20px;
+          padding: 24px;
+          display: flex;
+          align-items: center;
+          gap: 20px;
+          transition: all 0.3s ease;
+          text-decoration: none;
+          color: inherit;
+        }
+
+        .bento-item:hover {
+          transform: translateX(-5px);
+          border-color: var(--border-hover);
+          background: var(--bg-color);
+        }
+
+        .bento-icon-wrapper {
+          width: 48px;
+          height: 48px;
+          background: #f5f3ff;
+          color: var(--accent-1);
+          border-radius: 14px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+
+        .bento-text h5 {
+          font-size: 0.8rem;
+          color: var(--text-light);
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          margin-bottom: 4px;
+        }
+
+        .bento-text p {
+          font-size: 1.05rem;
+          font-weight: 700;
+          color: var(--text-main);
+          margin: 0;
+          word-break: break-all;
+        }
+
+        /* Footer */
+        .footer {
+          text-align: center;
+          padding: 40px 0 60px 0;
+          color: var(--text-light);
+          font-size: 0.9rem;
+          font-weight: 500;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+          0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+          70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+          100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(30px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-up {
+          animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+          .nav-content { justify-content: center; gap: 20px; }
+          .hero-title { font-size: 3rem; }
+          .timeline-wrapper { padding-left: 24px; margin-left: 8px; }
+          .timeline-dot { left: -31px; }
+          .timeline-content { padding: 24px; }
+          .bento-contact-grid { grid-template-columns: 1fr; }
+          .btn-group { justify-content: center; width: 100%; }
+          .btn { width: 100%; justify-content: center; }
+        }
+      `}</style>
+
+      {/* AMBIENT GLOW */}
+      <div className="ambient-glow"></div>
+
+      {/* NAVBAR */}
+      <nav className="navbar">
+        <div className="container nav-content">
+          <a href="#about" className="nav-link">Tentang</a>
+          <a href="#experience" className="nav-link">Pengalaman</a>
+          <a href="#projects" className="nav-link">Proyek</a>
+          <a href="#contact" className="nav-link">Kontak</a>
         </div>
       </nav>
 
-      {/* HERO / TENTANG SAYA */}
-      <section id="about" style={styles.heroSection}>
-        <p style={styles.heroGreeting}>Selamat Datang, Saya</p>
-        <h1 style={styles.heroName}>{PROFILE.nama}</h1>
-        <h2 style={styles.heroRole}>{PROFILE.peran}</h2>
-        <p style={styles.heroBio}>{PROFILE.bio}</p>
-        <div style={styles.heroActions}>
-          <a href="#projects" style={styles.btnPrimary}>Lihat Proyek</a>
-          <a href="#experience" style={styles.btnSecondary}>Riwayat Kerja</a>
+      {/* HERO SECTION */}
+      <section id="about" className="container hero animate-up">
+        <div className="status-badge">
+          <span className="status-dot"></span>
+          Tersedia untuk peluang baru
+        </div>
+        <h1 className="hero-title">{PROFILE.nama}</h1>
+        <h2 className="hero-subtitle">{PROFILE.peran}</h2>
+        <p className="hero-desc">{PROFILE.bio}</p>
+        <div className="btn-group">
+          <a href="#projects" className="btn btn-primary">
+            Lihat Proyek
+            <svg className="arrow-icon" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+            </svg>
+          </a>
+          <a href="#contact" className="btn btn-secondary">
+            Hubungi Saya
+          </a>
         </div>
       </section>
 
       {/* PENDIDIKAN SECTION */}
-      <section id="education" style={styles.section}>
-        <div style={styles.sectionHeader}>
-          <span style={styles.sectionNumber}>01.</span>
-          <h3 style={styles.sectionTitle}>Pendidikan</h3>
+      <section id="education" className="container section">
+        <div className="section-header">
+          <span className="section-num">01.</span>
+          <h3 className="section-title">Riwayat Pendidikan</h3>
         </div>
-        <div style={styles.educationCard}>
-          <div style={styles.timeLine}>{PENDIDIKAN.tahun}</div>
-          <div>
-            <h4 style={styles.eduInstitution}>{PENDIDIKAN.institusi}</h4>
-            <p style={styles.eduDetail}>{PENDIDIKAN.fakultas} &bull; {PENDIDIKAN.prodi}</p>
+        
+        <div className="timeline-wrapper">
+          <div className="timeline-item">
+            <div className="timeline-dot"></div>
+            <div className="timeline-date">{PENDIDIKAN.tahun}</div>
+            <div className="timeline-content">
+              <h4 className="timeline-title">{PENDIDIKAN.institusi}</h4>
+              <p className="timeline-subtitle">{PENDIDIKAN.fakultas}</p>
+              <p style={{ color: "var(--text-muted)", margin: 0 }}>{PENDIDIKAN.prodi}</p>
+            </div>
           </div>
         </div>
       </section>
 
       {/* PENGALAMAN SECTION */}
-      <section id="experience" style={styles.section}>
-        <div style={styles.sectionHeader}>
-          <span style={styles.sectionNumber}>02.</span>
-          <h3 style={styles.sectionTitle}>Pengalaman Kerja</h3>
+      <section id="experience" className="container section">
+        <div className="section-header">
+          <span className="section-num">02.</span>
+          <h3 className="section-title">Pengalaman Kerja</h3>
         </div>
-        <div style={styles.timelineContainer}>
+        
+        <div className="timeline-wrapper">
           {PENGALAMAN.map((exp) => (
-            <div key={exp.id} style={styles.experienceCard}>
-              <div style={styles.timeLine}>{exp.tahun}</div>
-              <div style={styles.expContent}>
-                <h4 style={styles.expTitle}>{exp.posisi} <span style={styles.atCompany}>@ {exp.perusahaan}</span></h4>
-                <ul style={styles.bulletList}>
+            <div key={exp.id} className="timeline-item">
+              <div className="timeline-dot"></div>
+              <div className="timeline-date">{exp.tahun}</div>
+              <div className="timeline-content">
+                <h4 className="timeline-title">{exp.posisi}</h4>
+                <p className="timeline-subtitle">@ {exp.perusahaan}</p>
+                <ul className="timeline-list">
                   {exp.tugas.map((tugas, index) => (
-                    <li key={index} style={styles.bulletItem}>{tugas}</li>
+                    <li key={index}>{tugas}</li>
                   ))}
                 </ul>
               </div>
@@ -138,25 +645,26 @@ function App() {
         </div>
       </section>
 
-      {/* PROYEK & PRESTASI SECTION */}
-      <section id="projects" style={styles.section}>
-        <div style={styles.sectionHeader}>
-          <span style={styles.sectionNumber}>03.</span>
-          <h3 style={styles.sectionTitle}>Proyek & Aktivitas</h3>
+      {/* PROYEK SECTION */}
+      <section id="projects" className="container section">
+        <div className="section-header">
+          <span className="section-num">03.</span>
+          <h3 className="section-title">Proyek & Aktivitas</h3>
         </div>
-        <div style={styles.projectGrid}>
+        
+        <div className="project-grid">
           {PROYEK.map((project) => (
-            <div key={project.id} style={styles.projectCard}>
-              <div>
-                <div style={styles.projectHeader}>
-                  <span style={styles.folderIcon}>💻</span>
-                </div>
-                <h4 style={styles.projectTitle}>{project.judul}</h4>
-                <p style={styles.projectDesc}>{project.deskripsi}</p>
+            <div key={project.id} className="project-card">
+              <div className="project-icon">
+                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                </svg>
               </div>
-              <div style={styles.projectTech}>
+              <h4 className="project-title">{project.judul}</h4>
+              <p className="project-desc">{project.deskripsi}</p>
+              <div className="tech-stack">
                 {project.tech.map((t, idx) => (
-                  <span key={idx} style={styles.techTag}>{t}</span>
+                  <span key={idx} className="tech-tag">{t}</span>
                 ))}
               </div>
             </div>
@@ -164,356 +672,79 @@ function App() {
         </div>
       </section>
 
-      {/* CONTACT SECTION (Sudah Dirapikan & Elegan) */}
-      <section id="contact" style={styles.contactSection}>
-        <div style={styles.sectionHeaderCentered}>
-          <span style={styles.sectionNumber}>04.</span>
-          <h3 style={styles.sectionTitle}>Hubungi Saya</h3>
+      {/* CONTACT SECTION (DIKEMBALIKAN LENGKAP DENGAN BENTO GRID) */}
+      <section id="contact" className="container section">
+        <div className="section-header">
+          <span className="section-num">04.</span>
+          <h3 className="section-title">Mari Berkolaborasi</h3>
         </div>
-        <p style={styles.contactDesc}>
-          Saya selalu terbuka untuk kolaborasi proyek IT, pengembangan sistem IoT/Cloud, atau sekadar bertukar ide. Silakan hubungi saya melalui jalur di bawah ini:
-        </p>
         
-        <div style={styles.contactGrid}>
-          <div style={styles.contactCardItem}>
-            <span style={styles.contactIcon}>📍</span>
-            <h5 style={styles.contactCardLabel}>Lokasi</h5>
-            <p style={styles.contactCardValue}>{PROFILE.alamat}</p>
+        <div className="bento-contact-grid">
+          {/* Kolom Kiri: Call to Action */}
+          <div className="bento-main-card">
+            <h4>Punya ide menarik?</h4>
+            <p>Saya selalu terbuka untuk diskusi teknologi, kolaborasi proyek IoT/Cloud, atau sekadar bertukar pikiran. Silakan hubungi saya melalui jalur komunikasi di samping.</p>
+            <div className="btn-group" style={{ marginTop: 'auto' }}>
+              <a href={`mailto:${PROFILE.email}`} className="btn btn-primary">
+                Kirim Email Cepat
+              </a>
+              <a href={PROFILE.github} target="_blank" rel="noreferrer" className="btn btn-secondary">
+                GitHub Profile
+              </a>
+            </div>
           </div>
-          <div style={styles.contactCardItem}>
-            <span style={styles.contactIcon}>📞</span>
-            <h5 style={styles.contactCardLabel}>Telepon</h5>
-            <p style={styles.contactCardValue}>{PROFILE.phone}</p>
-          </div>
-          <div style={styles.contactCardItem}>
-            <span style={styles.contactIcon}>📧</span>
-            <h5 style={styles.contactCardLabel}>Email</h5>
-            <p style={styles.contactCardValue}>{PROFILE.email}</p>
-          </div>
-        </div>
 
-        <div style={styles.contactActions}>
-          <a href={`mailto:${PROFILE.email}`} style={styles.btnCta}>Kirim Email Langsung</a>
-          <a href={PROFILE.github} target="_blank" rel="noreferrer" style={styles.btnGithub}>Kunjungi GitHub</a>
+          {/* Kolom Kanan: Detail Kontak LENGKAP */}
+          <div className="bento-details">
+            {/* Lokasi */}
+            <div className="bento-item">
+              <div className="bento-icon-wrapper">
+                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+              </div>
+              <div className="bento-text">
+                <h5>Lokasi</h5>
+                <p>{PROFILE.alamat}</p>
+              </div>
+            </div>
+
+            {/* Email */}
+            <a href={`mailto:${PROFILE.email}`} className="bento-item">
+              <div className="bento-icon-wrapper">
+                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <div className="bento-text">
+                <h5>Email</h5>
+                <p style={{fontSize: "0.95rem"}}>{PROFILE.email}</p>
+              </div>
+            </a>
+
+            {/* Nomor Telepon */}
+            <a href={`tel:${PROFILE.phone}`} className="bento-item">
+              <div className="bento-icon-wrapper">
+                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                </svg>
+              </div>
+              <div className="bento-text">
+                <h5>Telepon / WA</h5>
+                <p>{PROFILE.phone}</p>
+              </div>
+            </a>
+          </div>
         </div>
       </section>
 
       {/* FOOTER */}
-      <footer style={styles.footer}>
-        <p>Dirancang & Dibangun oleh {PROFILE.nama}</p>
-        <p style={styles.footerSub}>Vite + React &bull; Hosted di Vercel</p>
+      <footer className="footer container">
+        <p>&copy; {new Date().getFullYear()} {PROFILE.nama}. Dirancang dengan React & CSS Modern.</p>
       </footer>
-    </div>
+    </>
   );
 }
-
-// ==========================================
-// PREMIUM LIGHT STYLING
-// ==========================================
-const styles = {
-  wrapper: {
-    backgroundColor: "#ffffff",
-    color: "#4a5568",
-    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-    minHeight: "100vh",
-    padding: "0 24px",
-    lineHeight: "1.6",
-  },
-  navbar: {
-    display: "flex",
-    justifyContent: "flex-end", // Bergeser ke kanan penuh karena logo dihapus
-    alignItems: "center",
-    padding: "32px 0",
-    maxWidth: "1000px",
-    margin: "0 auto",
-  },
-  navLinks: {
-    display: "flex",
-    gap: "32px",
-  },
-  navLink: {
-    color: "#4a5568",
-    textDecoration: "none",
-    fontSize: "0.95rem",
-    fontWeight: "500",
-    transition: "color 0.2s"
-  },
-  heroSection: {
-    maxWidth: "1000px",
-    margin: "80px auto 140px auto",
-    display: "flex",
-    flexDirection: "column",
-  },
-  heroGreeting: {
-    color: "#3182ce",
-    fontWeight: "600",
-    fontSize: "0.9rem",
-    margin: "0 0 12px 0",
-    textTransform: "uppercase",
-    letterSpacing: "1px"
-  },
-  heroName: {
-    color: "#1a202c",
-    fontSize: "clamp(2.5rem, 6vw, 4rem)",
-    fontWeight: "800",
-    margin: 0,
-    letterSpacing: "-1.5px"
-  },
-  heroRole: {
-    color: "#718096",
-    fontSize: "clamp(1.5rem, 4vw, 2.2rem)",
-    fontWeight: "600",
-    margin: "5px 0 25px 0",
-    letterSpacing: "-0.5px"
-  },
-  heroBio: {
-    maxWidth: "750px",
-    fontSize: "1.05rem",
-    color: "#4a5568",
-    marginBottom: "45px",
-    textAlign: "justify"
-  },
-  heroActions: {
-    display: "flex",
-    gap: "16px",
-  },
-  btnPrimary: {
-    backgroundColor: "#1a202c",
-    color: "#ffffff",
-    padding: "14px 28px",
-    borderRadius: "6px",
-    textDecoration: "none",
-    fontWeight: "600",
-    fontSize: "0.95rem",
-  },
-  btnSecondary: {
-    backgroundColor: "transparent",
-    color: "#1a202c",
-    border: "1px solid #cbd5e0",
-    padding: "14px 28px",
-    borderRadius: "6px",
-    textDecoration: "none",
-    fontWeight: "600",
-    fontSize: "0.95rem",
-  },
-  section: {
-    maxWidth: "1000px",
-    margin: "0 auto 120px auto",
-    scrollMarginTop: "40px"
-  },
-  sectionHeader: {
-    display: "flex",
-    alignItems: "center",
-    gap: "12px",
-    marginBottom: "35px",
-    borderBottom: "1px solid #edf2f7",
-    paddingBottom: "15px"
-  },
-  sectionHeaderCentered: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "12px",
-    marginBottom: "25px",
-  },
-  sectionNumber: {
-    color: "#3182ce",
-    fontWeight: "600",
-    fontSize: "1.1rem",
-  },
-  sectionTitle: {
-    color: "#1a202c",
-    fontSize: "1.5rem",
-    fontWeight: "700",
-    margin: 0,
-  },
-  educationCard: {
-    backgroundColor: "#f7fafc",
-    padding: "24px",
-    borderRadius: "8px",
-    border: "1px solid #e2e8f0",
-    display: "flex",
-    gap: "30px",
-    flexWrap: "wrap"
-  },
-  timeLine: {
-    fontFamily: "monospace",
-    fontSize: "0.95rem",
-    color: "#3182ce",
-    fontWeight: "600",
-    minWidth: "200px"
-  },
-  eduInstitution: {
-    color: "#1a202c",
-    fontSize: "1.25rem",
-    margin: "0 0 5px 0",
-    fontWeight: "700"
-  },
-  eduDetail: {
-    color: "#4a5568",
-    margin: 0
-  },
-  timelineContainer: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "24px"
-  },
-  experienceCard: {
-    backgroundColor: "#ffffff",
-    padding: "24px",
-    borderRadius: "8px",
-    border: "1px solid #e2e8f0",
-    display: "flex",
-    gap: "30px",
-    flexWrap: "wrap",
-    boxShadow: "0 2px 4px rgba(0,0,0,0.02)"
-  },
-  expContent: {
-    flex: 1
-  },
-  expTitle: {
-    color: "#1a202c",
-    fontSize: "1.2rem",
-    margin: "0 0 15px 0",
-    fontWeight: "700"
-  },
-  atCompany: {
-    color: "#3182ce"
-  },
-  bulletList: {
-    margin: 0,
-    paddingLeft: "20px",
-    color: "#4a5568"
-  },
-  bulletItem: {
-    marginBottom: "8px",
-    fontSize: "0.95rem"
-  },
-  projectGrid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(400px, 1fr))",
-    gap: "24px",
-  },
-  projectCard: {
-    backgroundColor: "#ffffff",
-    padding: "32px",
-    borderRadius: "12px",
-    border: "1px solid #e2e8f0",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-    boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.04)"
-  },
-  projectHeader: {
-    marginBottom: "15px",
-  },
-  projectTitle: {
-    color: "#1a202c",
-    fontSize: "1.3rem",
-    fontWeight: "700",
-    margin: "0 0 12px 0",
-  },
-  projectDesc: {
-    fontSize: "0.95rem",
-    color: "#4a5568",
-    margin: "0 0 24px 0",
-    lineHeight: "1.6",
-    textAlign: "justify"
-  },
-  projectTech: {
-    display: "flex",
-    flexWrap: "wrap",
-    gap: "8px",
-  },
-  techTag: {
-    fontSize: "0.8rem",
-    color: "#4a5568",
-    backgroundColor: "#edf2f7",
-    padding: "4px 10px",
-    borderRadius: "4px",
-    fontWeight: "500"
-  },
-  contactSection: {
-    maxWidth: "800px",
-    margin: "0 auto 160px auto",
-    textAlign: "center",
-    scrollMarginTop: "40px"
-  },
-  contactDesc: {
-    fontSize: "1.05rem",
-    color: "#4a5568",
-    marginBottom: "40px",
-  },
-  contactGrid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-    gap: "20px",
-    marginBottom: "40px"
-  },
-  contactCardItem: {
-    backgroundColor: "#ffffff",
-    padding: "24px 15px",
-    borderRadius: "8px",
-    border: "1px solid #e2e8f0",
-    boxShadow: "0 2px 4px rgba(0,0,0,0.02)"
-  },
-  contactIcon: {
-    fontSize: "1.5rem",
-    display: "block",
-    marginBottom: "10px"
-  },
-  contactCardLabel: {
-    margin: "0 0 6px 0",
-    color: "#718096",
-    fontSize: "0.85rem",
-    textTransform: "uppercase",
-    letterSpacing: "0.5px"
-  },
-  contactCardValue: {
-    margin: 0,
-    color: "#1a202c",
-    fontWeight: "600",
-    fontSize: "1rem"
-  },
-  contactActions: {
-    display: "flex",
-    justifyContent: "center",
-    gap: "16px",
-    flexWrap: "wrap"
-  },
-  btnCta: {
-    display: "inline-block",
-    backgroundColor: "#3182ce",
-    color: "#ffffff",
-    padding: "14px 32px",
-    borderRadius: "6px",
-    textDecoration: "none",
-    fontWeight: "600",
-    fontSize: "0.95rem",
-    boxShadow: "0 4px 14px rgba(49, 130, 206, 0.3)"
-  },
-  btnGithub: {
-    display: "inline-block",
-    backgroundColor: "#1a202c",
-    color: "#ffffff",
-    padding: "14px 32px",
-    borderRadius: "6px",
-    textDecoration: "none",
-    fontWeight: "600",
-    fontSize: "0.95rem",
-  },
-  footer: {
-    textAlign: "center",
-    padding: "40px 0",
-    fontSize: "0.85rem",
-    color: "#a0aec0",
-    borderTop: "1px solid #edf2f7",
-  },
-  footerSub: {
-    color: "#3182ce",
-    marginTop: "4px",
-    fontWeight: "500"
-  }
-};
 
 export default App;
