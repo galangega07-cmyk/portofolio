@@ -2,6 +2,7 @@ export const PROFILE = {
   nama: "Galang Ega Yudistira",
   panggilan: "Galang",
   peran: "IT Student & Developer",
+  foto: "/images/profile-galang.jpg",
   tagline: "Tertarik pada pengembangan IoT, Cloud Computing, dan Web Development",
   alamat: "Malang, Jawa Timur, Indonesia",
   phone: "082120026900",
@@ -113,6 +114,7 @@ export const PROYEK = [
     subJudul: "SmartOryza - Pertanian Padi Berbasis IoT",
     kategori: "IoT & Cloud Infrastructure",
     status: "Completed",
+    demoUrl: null,
     image: "/images/smart-oryza.png",
     deskripsi: "Sistem pemantauan data perangkat Internet of Things (IoT) yang terhubung ke cloud server secara aman menggunakan Virtual Private Server (VPS) dan tunneling WireGuard untuk modernisasi pertanian padi (SmartOryza). Dilengkapi dashboard interaktif untuk monitoring metrik data secara real-time.",
     fitur: [
@@ -129,7 +131,8 @@ export const PROYEK = [
     judul: "Web Laravel",
     subJudul: "Tatik Catering - Web Profil & Layanan Katering",
     kategori: "Fullstack Web Application",
-    status: "Completed",
+    status: "Live Demo",
+    demoUrl: "https://tatik-catering-web.vercel.app/",
     image: "/images/tatik-catering.png",
     deskripsi: "Aplikasi web informasi dan katalog profil usaha kuliner Tatik Catering berbasis framework PHP Laravel. Menyajikan informasi menu katering, ulasan pelanggan, FAQ, serta sistem kontak pemesanan langsung.",
     fitur: [
@@ -146,7 +149,8 @@ export const PROYEK = [
     judul: "SIMIKP Kota Batu",
     subJudul: "Sistem Informasi Manajemen Informasi & Komunikasi Publik",
     kategori: "Government & Enterprise Web Application",
-    status: "Completed",
+    status: "Live Demo",
+    demoUrl: "https://simikp.onrender.com/login",
     image: "/images/simikp-kota-batu.png",
     deskripsi: "Aplikasi sistem informasi berbasis web untuk tata kelola administrasi informasi dan komunikasi publik di lingkungan Pemerintah Kota Batu (Dinas Komunikasi dan Informatika / Diskominfo). Dilengkapi portal autentikasi kedinasan aman dan dashboard manajemen data publik terintegrasi.",
     fitur: [
