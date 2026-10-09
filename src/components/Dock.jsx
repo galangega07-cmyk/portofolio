@@ -1,8 +1,10 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 /**
- * Compact Top Dock Component (ReactBits Pro Portfolio Template)
- * Positioned at the top center, compact sizing with proximity magnification scaling.
+ * Responsive ReactBits macOS Magnifying Dock Component
+ * - Desktop (>= 769px): Floating Top Center with Smooth Proximity Magnification
+ * - Mobile (<= 768px): Floating Bottom Center Bar with Thumb-Friendly Tap Targets
+ * - Extra Small (< 480px): Compact Fit for Core Navigation
  */
 const DOCK_ITEMS = [
   {
@@ -73,6 +75,7 @@ const DOCK_ITEMS = [
     id: 'github',
     label: 'GitHub Profile',
     externalUrl: 'https://github.com/galangega07-cmyk',
+    isExternal: true,
     icon: (
       <svg width="17" height="17" fill="currentColor" viewBox="0 0 24 24">
         <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
@@ -83,6 +86,7 @@ const DOCK_ITEMS = [
     id: 'whatsapp',
     label: 'WhatsApp Direct',
     externalUrl: 'https://wa.me/6282120026900',
+    isExternal: true,
     icon: (
       <svg width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
@@ -100,11 +104,23 @@ const Dock = ({
 }) => {
   const [mouseX, setMouseX] = useState(null);
   const [hoveredId, setHoveredId] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
   const dockRef = useRef(null);
   const itemRefs = useRef({});
 
+  // Detect mobile viewport
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile, { passive: true });
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const handleMouseMove = (e) => {
-    if (!dockRef.current) return;
+    if (isMobile || !dockRef.current) return;
     const rect = dockRef.current.getBoundingClientRect();
     setMouseX(e.clientX - rect.left);
   };
@@ -122,32 +138,39 @@ const Dock = ({
     }
   };
 
+  // Dynamic responsive sizing
+  const currentBaseSize = isMobile ? 32 : baseItemSize;
+  const currentMag = isMobile ? 36 : magnification;
+  const currentDist = isMobile ? 60 : distance;
+
   // Calculate dynamic size using Cosine proximity falloff
   const getItemSize = (id) => {
-    if (mouseX === null) return baseItemSize;
+    if (isMobile || mouseX === null) return currentBaseSize;
     const el = itemRefs.current[id];
-    if (!el || !dockRef.current) return baseItemSize;
+    if (!el || !dockRef.current) return currentBaseSize;
 
     const dockRect = dockRef.current.getBoundingClientRect();
     const itemRect = el.getBoundingClientRect();
     const itemCenter = itemRect.left + itemRect.width / 2 - dockRect.left;
 
     const dist = Math.abs(mouseX - itemCenter);
-    if (dist > distance) return baseItemSize;
+    if (dist > currentDist) return currentBaseSize;
 
-    const scale = Math.cos((dist / distance) * (Math.PI / 2));
-    return baseItemSize + (magnification - baseItemSize) * scale;
+    const scale = Math.cos((dist / currentDist) * (Math.PI / 2));
+    return currentBaseSize + (currentMag - currentBaseSize) * scale;
   };
 
   return (
     <div
+      className="reactbits-dock-wrapper"
       style={{
         position: 'fixed',
-        top: '16px',
         left: '50%',
         transform: 'translateX(-50%)',
         zIndex: 1000,
-        pointerEvents: 'none'
+        pointerEvents: 'none',
+        maxWidth: '100vw',
+        padding: '0 12px'
       }}
     >
       <nav
@@ -159,15 +182,16 @@ const Dock = ({
           pointerEvents: 'auto',
           display: 'inline-flex',
           alignItems: 'center',
-          gap: '6px',
-          padding: '6px 10px',
+          gap: isMobile ? '4px' : '6px',
+          padding: isMobile ? '5px 8px' : '6px 10px',
           borderRadius: '24px',
-          background: 'rgba(10, 15, 29, 0.84)',
+          background: 'rgba(10, 15, 29, 0.88)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
           border: '1px solid rgba(255, 255, 255, 0.12)',
           boxShadow: '0 15px 35px rgba(0, 0, 0, 0.55), 0 0 25px rgba(249, 115, 22, 0.15)',
-          height: `${magnification + 12}px`,
+          height: isMobile ? 'auto' : `${magnification + 12}px`,
+          minHeight: isMobile ? '46px' : 'auto',
           transition: 'all 0.25s ease'
         }}
       >
@@ -176,11 +200,12 @@ const Dock = ({
             return (
               <div
                 key={`divider-${idx}`}
+                className="dock-divider"
                 style={{
                   width: '1px',
-                  height: '20px',
+                  height: '18px',
                   background: 'rgba(255, 255, 255, 0.14)',
-                  margin: '0 3px',
+                  margin: '0 2px',
                   alignSelf: 'center'
                 }}
               />
@@ -189,13 +214,14 @@ const Dock = ({
 
           const isActive = activeSection === item.id || (activeSection === 'profile' && item.id === 'hero');
           const currentSize = getItemSize(item.id);
-          const isHovered = hoveredId === item.id;
+          const isHovered = !isMobile && hoveredId === item.id;
 
           return (
             <div
               key={item.id}
               ref={(el) => (itemRefs.current[item.id] = el)}
-              onMouseEnter={() => setHoveredId(item.id)}
+              onMouseEnter={() => !isMobile && setHoveredId(item.id)}
+              className={`dock-item-wrapper ${item.isExternal ? 'dock-item-external' : ''}`}
               style={{
                 position: 'relative',
                 display: 'flex',
@@ -204,14 +230,15 @@ const Dock = ({
                 justifyContent: 'center'
               }}
             >
-              {/* macOS Style Magnified Item Button */}
+              {/* Magnified Item Button */}
               <button
                 onClick={() => handleItemClick(item)}
                 aria-label={item.label}
+                className={`dock-btn ${isActive ? 'active' : ''}`}
                 style={{
                   width: `${currentSize}px`,
                   height: `${currentSize}px`,
-                  borderRadius: '13px',
+                  borderRadius: isMobile ? '10px' : '13px',
                   background: isActive
                     ? 'linear-gradient(135deg, rgba(249, 115, 22, 0.28) 0%, rgba(245, 158, 11, 0.2) 100%)'
                     : isHovered
@@ -240,7 +267,7 @@ const Dock = ({
               >
                 {/* Scale Icon Proportionally */}
                 <div style={{
-                  transform: `scale(${currentSize / baseItemSize})`,
+                  transform: `scale(${currentSize / currentBaseSize})`,
                   transformOrigin: 'center center',
                   display: 'flex',
                   alignItems: 'center',
@@ -251,10 +278,10 @@ const Dock = ({
                 </div>
               </button>
 
-              {/* Running Active Status Dot underneath */}
+              {/* Running Active Status Dot */}
               <div style={{
                 position: 'absolute',
-                bottom: '-5px',
+                bottom: isMobile ? '-4px' : '-5px',
                 width: '3.5px',
                 height: '3.5px',
                 borderRadius: '50%',
@@ -263,9 +290,10 @@ const Dock = ({
                 transition: 'all 0.2s ease'
               }} />
 
-              {/* Floating Tooltip below Top Dock */}
+              {/* Floating Tooltip (Desktop Only) */}
               {isHovered && (
                 <div
+                  className="dock-tooltip"
                   style={{
                     position: 'absolute',
                     top: 'calc(100% + 10px)',
@@ -297,3 +325,4 @@ const Dock = ({
 };
 
 export default Dock;
+

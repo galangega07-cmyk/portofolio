@@ -190,7 +190,7 @@ const App = () => {
       </div>
 
       {/* ========================================================================= */}
-      {/* REACTBITS TOP COMPACT DOCK (Positioned at Top Center) */}
+      {/* REACTBITS TOP/BOTTOM RESPONSIVE DOCK */}
       {/* ========================================================================= */}
       <Dock
         activeSection={activeSection}
@@ -201,32 +201,17 @@ const App = () => {
       />
 
       {/* Main Single-Page Content Stream */}
-      <main className="main-content" style={{ paddingTop: '80px', paddingBottom: '50px' }}>
+      <main className="main-content">
         <div className="container">
 
           {/* ===================================================================== */}
           {/* 1. HERO SECTION (With Dither Veil & Typewriter) */}
           {/* ===================================================================== */}
-          <section id="hero" style={{
-            padding: '20px 0 54px',
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 380px), 1fr))',
-            gap: '40px',
-            alignItems: 'center'
-          }}>
+          <section id="hero" className="hero-section">
             {/* Left Hero Text Column */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              <div className="hero-stagger-1" style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
-                fontSize: '0.82rem',
-                fontWeight: 700,
-                letterSpacing: '1.2px',
-                color: 'var(--accent-primary)',
-                textTransform: 'uppercase'
-              }}>
-                <span style={{ width: '18px', height: '2px', background: 'var(--accent-primary)', display: 'inline-block' }} />
+            <div className="hero-text-col">
+              <div className="hero-stagger-1 hero-eyebrow">
+                <span className="hero-eyebrow-line" />
                 <span>HALO, SAYA</span>
               </div>
 
@@ -239,45 +224,39 @@ const App = () => {
                   delay={0.035}
                   shimmer={true}
                   interactive={true}
+                  className="hero-headline"
                   style={{
-                    fontSize: 'clamp(2.4rem, 6vw, 3.8rem)',
+                    fontSize: 'clamp(1.9rem, 6.2vw, 3.6rem)',
                     fontWeight: 900,
-                    lineHeight: 1.12,
+                    lineHeight: 1.15,
                     letterSpacing: '-1px',
                     color: '#ffffff',
-                    margin: 0
+                    margin: 0,
+                    wordBreak: 'break-word'
                   }}
                 />
               </div>
 
               {/* Typewriter Subtitle */}
-              <div className="hero-stagger-3" style={{ marginTop: '2px', display: 'flex', alignItems: 'baseline', flexWrap: 'wrap', gap: '6px' }}>
-                <span style={{ fontSize: '1.1rem', color: 'var(--text-muted)', fontWeight: 500 }}>
+              <div className="hero-stagger-3 hero-subtitle-row">
+                <span className="hero-subtitle-prefix">
                   Seorang
                 </span>
-                <span className="typewriter-underline" style={{
-                  fontSize: '1.25rem',
-                  fontWeight: 800,
-                  color: '#ffffff'
-                }}>
+                <span className="typewriter-underline hero-typewriter-box">
                   <span>{currentText}</span>
                   <span className="typewriter-cursor">|</span>
                 </span>
               </div>
 
               {/* Social Icons Bar */}
-              <div className="hero-stagger-4" style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '12px',
-                margin: '8px 0 4px'
-              }}>
+              <div className="hero-stagger-4 hero-social-bar">
                 <a
                   href={PROFILE.github}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="social-icon-btn"
                   title="GitHub Profile"
+                  aria-label="GitHub Profile"
                 >
                   <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
                     <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
@@ -290,6 +269,7 @@ const App = () => {
                   rel="noopener noreferrer"
                   className="social-icon-btn"
                   title="WhatsApp Direct"
+                  aria-label="WhatsApp Direct"
                 >
                   <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
@@ -300,6 +280,7 @@ const App = () => {
                   href={`mailto:${PROFILE.email}`}
                   className="social-icon-btn"
                   title="Kirim Email"
+                  aria-label="Kirim Email"
                 >
                   <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                     <rect width="20" height="16" x="2" y="4" rx="2" />
@@ -309,23 +290,12 @@ const App = () => {
               </div>
 
               {/* Bio Pitch */}
-              <p className="hero-stagger-5" style={{
-                fontSize: '0.98rem',
-                color: 'var(--text-muted)',
-                lineHeight: '1.75',
-                maxWidth: '520px'
-              }}>
+              <p className="hero-stagger-5 hero-bio-text">
                 Saya membantu bisnis dan institusi mengubah ide menjadi solusi digital & sistem IoT yang andal, efisien, dan berfungsi optimal.
               </p>
 
               {/* Action Buttons */}
-              <div className="hero-stagger-5" style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '14px',
-                flexWrap: 'wrap',
-                marginTop: '8px'
-              }}>
+              <div className="hero-stagger-5 hero-btn-group">
                 <button
                   className="btn-hero-primary"
                   onClick={() => scrollToSection('projects')}
@@ -346,7 +316,7 @@ const App = () => {
             </div>
 
             {/* Right Hero Portrait Card with ReactBits ProfileCard */}
-            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '-18px', alignSelf: 'center' }}>
+            <div className="hero-profile-wrapper">
               <ProfileCard
                 avatarUrl={PROFILE.foto || "/images/profile-galang.jpg"}
                 miniAvatarUrl={PROFILE.foto || "/images/profile-galang.jpg"}
@@ -361,7 +331,7 @@ const App = () => {
                 behindGlowEnabled={true}
                 behindGlowColor="rgba(249, 115, 22, 0.45)"
                 imagePosition="center 10%"
-                imageHeight="420px"
+                imageHeight="clamp(290px, 44vw, 420px)"
               />
             </div>
           </section>
@@ -369,77 +339,55 @@ const App = () => {
           {/* ===================================================================== */}
           {/* 2. TENTANG SAYA & HIGHLIGHTS (Scroll Reveal) */}
           {/* ===================================================================== */}
-          <section id="about" className="scroll-reveal" style={{ padding: '36px 0 44px' }}>
+          <section id="about" className="scroll-reveal about-section">
             {/* Section Header */}
-            <div style={{ marginBottom: '24px' }}>
-              <div style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                fontSize: '0.8rem',
-                fontWeight: 700,
-                color: 'var(--accent-primary)',
-                textTransform: 'uppercase',
-                letterSpacing: '1px',
-                marginBottom: '6px'
-              }}>
-                <span style={{ width: '16px', height: '2px', background: 'var(--accent-primary)' }} />
+            <div className="section-header-block">
+              <div className="section-badge-tag">
+                <span className="section-badge-line" />
                 <span>Profil & Latar Belakang</span>
               </div>
-              <h2 style={{ fontSize: 'clamp(1.8rem, 4.5vw, 2.4rem)', fontWeight: 900, color: '#ffffff', letterSpacing: '-0.5px', margin: 0 }}>
+              <h2 className="section-main-heading">
                 Tentang Saya
               </h2>
             </div>
 
             {/* Main Bio Card */}
-            <div className="card-base" style={{ padding: '24px 28px', marginBottom: '20px' }}>
-              <p style={{ fontSize: '0.98rem', color: '#e2e8f0', lineHeight: '1.8', margin: '0 0 16px' }}>
+            <div className="card-base about-bio-card">
+              <p className="about-bio-text">
                 {PROFILE.bio}
               </p>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap', paddingTop: '14px', borderTop: '1px solid var(--border-light)' }}>
-                <span style={{ fontSize: '0.78rem', color: 'var(--text-light)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', marginRight: '4px' }}>
+              <div className="about-interests-row">
+                <span className="about-interests-label">
                   Minat & Fokus:
                 </span>
-                {PROFILE.interests.map((interest, iIdx) => (
-                  <span key={iIdx} className="tag-pill" style={{ fontSize: '0.76rem', padding: '4px 12px' }}>
-                    {interest}
-                  </span>
-                ))}
+                <div className="about-interests-tags">
+                  {PROFILE.interests.map((interest, iIdx) => (
+                    <span key={iIdx} className="tag-pill tag-interest">
+                      {interest}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
 
             {/* Quick Stat Highlights */}
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 220px), 1fr))',
-              gap: '14px',
-              marginBottom: '20px'
-            }}>
+            <div className="stats-grid">
               {/* Card 1: Pendidikan */}
               <div
-                className="card-base"
+                className="card-base stat-card"
                 onClick={() => scrollToSection('education')}
-                style={{
-                  padding: '20px',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  minHeight: '125px',
-                  background: 'rgba(13, 18, 32, 0.65)'
-                }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <span style={{ fontSize: '0.72rem', color: 'var(--text-light)', fontWeight: 700, letterSpacing: '0.6px', textTransform: 'uppercase' }}>
+                <div className="stat-card-top">
+                  <span className="stat-card-label">
                     Pendidikan
                   </span>
-                  <span style={{ fontSize: '1rem' }}>🎓</span>
+                  <span className="stat-card-icon">🎓</span>
                 </div>
                 <div>
-                  <div style={{ fontSize: '1.08rem', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.3px' }}>
+                  <div className="stat-card-value">
                     Universitas Brawijaya
                   </div>
-                  <div style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', fontWeight: 600, marginTop: '2px' }}>
+                  <div className="stat-card-sub accent">
                     D3 Teknologi Informasi
                   </div>
                 </div>
@@ -447,29 +395,20 @@ const App = () => {
 
               {/* Card 2: Proyek Live */}
               <div
-                className="card-base"
+                className="card-base stat-card"
                 onClick={() => scrollToSection('projects')}
-                style={{
-                  padding: '20px',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  minHeight: '125px',
-                  background: 'rgba(13, 18, 32, 0.65)'
-                }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <span style={{ fontSize: '0.72rem', color: 'var(--text-light)', fontWeight: 700, letterSpacing: '0.6px', textTransform: 'uppercase' }}>
+                <div className="stat-card-top">
+                  <span className="stat-card-label">
                     Proyek Online
                   </span>
-                  <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#10b981', boxShadow: '0 0 8px #10b981' }} />
+                  <span className="status-dot-active" />
                 </div>
                 <div>
-                  <div style={{ fontSize: '1.08rem', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.3px' }}>
+                  <div className="stat-card-value">
                     2 Web Live Online
                   </div>
-                  <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: 500, marginTop: '2px' }}>
+                  <div className="stat-card-sub">
                     Tatik Catering & SIMIKP ↗
                   </div>
                 </div>
@@ -477,27 +416,19 @@ const App = () => {
 
               {/* Card 3: Fokus Keahlian */}
               <div
-                className="card-base"
-                style={{
-                  padding: '20px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  minHeight: '125px',
-                  background: 'rgba(13, 18, 32, 0.65)'
-                }}
+                className="card-base stat-card"
               >
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <span style={{ fontSize: '0.72rem', color: 'var(--text-light)', fontWeight: 700, letterSpacing: '0.6px', textTransform: 'uppercase' }}>
+                <div className="stat-card-top">
+                  <span className="stat-card-label">
                     Keahlian
                   </span>
-                  <span style={{ fontSize: '1rem', color: '#f59e0b' }}>⚡</span>
+                  <span className="stat-card-icon">⚡</span>
                 </div>
                 <div>
-                  <div style={{ fontSize: '1.08rem', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.3px' }}>
+                  <div className="stat-card-value">
                     IoT & Web Dev
                   </div>
-                  <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: 500, marginTop: '2px' }}>
+                  <div className="stat-card-sub">
                     Laravel, VPS & WireGuard
                   </div>
                 </div>
@@ -505,29 +436,20 @@ const App = () => {
 
               {/* Card 4: Domisili */}
               <div
-                className="card-base"
+                className="card-base stat-card"
                 onClick={() => scrollToSection('contact')}
-                style={{
-                  padding: '20px',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  minHeight: '125px',
-                  background: 'rgba(13, 18, 32, 0.65)'
-                }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <span style={{ fontSize: '0.72rem', color: 'var(--text-light)', fontWeight: 700, letterSpacing: '0.6px', textTransform: 'uppercase' }}>
+                <div className="stat-card-top">
+                  <span className="stat-card-label">
                     Domisili
                   </span>
-                  <span style={{ fontSize: '1rem' }}>📍</span>
+                  <span className="stat-card-icon">📍</span>
                 </div>
                 <div>
-                  <div style={{ fontSize: '1.08rem', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.3px' }}>
+                  <div className="stat-card-value">
                     Malang, Jawa Timur
                   </div>
-                  <div style={{ fontSize: '0.8rem', color: '#10b981', fontWeight: 600, marginTop: '2px' }}>
+                  <div className="stat-card-sub success">
                     Siap On-Site & Remote
                   </div>
                 </div>
@@ -535,11 +457,11 @@ const App = () => {
             </div>
 
             {/* Simple Clean Tech Badges Row */}
-            <div className="card-base" style={{ padding: '16px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
-              <span style={{ fontSize: '0.76rem', fontWeight: 800, color: 'var(--text-light)', textTransform: 'uppercase', letterSpacing: '0.8px' }}>
+            <div className="card-base tech-stack-card">
+              <span className="tech-stack-title">
                 Tech Stack
               </span>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+              <div className="tech-stack-pills">
                 {[
                   "Laravel", "PHP", "React.js", "MySQL", "Ubuntu VPS", "WireGuard", "IoT & Sensor", "Tailwind CSS", "Git"
                 ].map((chip, idx) => (
@@ -558,77 +480,32 @@ const App = () => {
           {/* ===================================================================== */}
           {/* 3. FEATURED PROJECTS (Scroll Reveal) */}
           {/* ===================================================================== */}
-          <section id="projects" className="scroll-reveal" style={{ padding: '40px 0 60px' }}>
-            <div style={{
-              display: 'flex',
-              alignItems: 'flex-start',
-              justifyContent: 'space-between',
-              flexWrap: 'wrap',
-              gap: '20px',
-              marginBottom: '24px'
-            }}>
+          <section id="projects" className="scroll-reveal projects-section">
+            <div className="projects-header-row">
               <div>
-                <div style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  fontSize: '0.8rem',
-                  fontWeight: 700,
-                  color: 'var(--accent-primary)',
-                  textTransform: 'uppercase',
-                  letterSpacing: '1px',
-                  marginBottom: '6px'
-                }}>
-                  <span style={{ width: '16px', height: '2px', background: 'var(--accent-primary)' }} />
+                <div className="section-badge-tag">
+                  <span className="section-badge-line" />
                   <span>Portofolio Teknis</span>
                 </div>
-                <h2 style={{ fontSize: 'clamp(1.8rem, 4.5vw, 2.4rem)', fontWeight: 900, color: '#ffffff', letterSpacing: '-0.5px', margin: 0 }}>
+                <h2 className="section-main-heading">
                   Proyek & Karya Implementasi
                 </h2>
-                <p style={{ color: 'var(--text-muted)', fontSize: '0.94rem', marginTop: '6px', maxWidth: '600px' }}>
+                <p className="section-sub-desc">
                   Eksplorasi sistem Internet of Things (IoT), infrastruktur server cloud VPS, dan aplikasi web informasi Laravel.
                 </p>
               </div>
 
               {/* View Switcher: Flex Carousel / Grid */}
-              <div style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '4px',
-                background: 'var(--bg-subtle)',
-                padding: '4px',
-                borderRadius: 'var(--radius-full)',
-                border: '1px solid var(--border)'
-              }}>
+              <div className="projects-view-switcher">
                 <button
                   onClick={() => setProjectViewMode('flex')}
-                  style={{
-                    padding: '6px 14px',
-                    borderRadius: 'var(--radius-full)',
-                    border: 'none',
-                    fontSize: '0.8rem',
-                    fontWeight: 700,
-                    cursor: 'pointer',
-                    transition: 'all 0.2s ease',
-                    background: projectViewMode === 'flex' ? 'var(--accent-primary)' : 'transparent',
-                    color: projectViewMode === 'flex' ? '#090d16' : 'var(--text-muted)'
-                  }}
+                  className={`view-switch-btn ${projectViewMode === 'flex' ? 'active' : ''}`}
                 >
                   ✨ Flex Carousel
                 </button>
                 <button
                   onClick={() => setProjectViewMode('grid')}
-                  style={{
-                    padding: '6px 14px',
-                    borderRadius: 'var(--radius-full)',
-                    border: 'none',
-                    fontSize: '0.8rem',
-                    fontWeight: 700,
-                    cursor: 'pointer',
-                    transition: 'all 0.2s ease',
-                    background: projectViewMode === 'grid' ? 'var(--accent-primary)' : 'transparent',
-                    color: projectViewMode === 'grid' ? '#090d16' : 'var(--text-muted)'
-                  }}
+                  className={`view-switch-btn ${projectViewMode === 'grid' ? 'active' : ''}`}
                 >
                   ⊞ Grid View
                 </button>
@@ -643,29 +520,34 @@ const App = () => {
                 autoPlay={false}
               />
             ) : (
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 340px), 1fr))',
-                gap: '24px'
-              }}>
+              <div className="projects-grid-view">
                 {PROYEK.map((project, pIdx) => (
-                  <div key={project.id || pIdx} className="card-base" style={{ display: 'flex', flexDirection: 'column', padding: '24px' }}>
+                  <div key={project.id || pIdx} className="card-base project-grid-card">
                     {project.image && (
-                      <div style={{ width: '100%', height: '210px', borderRadius: '16px', overflow: 'hidden', marginBottom: '18px', background: '#090d16' }}>
-                        <img src={project.image} alt={project.judul} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      <div className="project-grid-thumb">
+                        <img src={project.image} alt={project.judul} />
                       </div>
                     )}
-                    <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: '#ffffff', marginBottom: '4px' }}>
+                    <h3 className="project-grid-title">
                       {project.judul}
                     </h3>
-                    <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', lineHeight: '1.6', marginBottom: '16px' }}>
+                    {project.subJudul && (
+                      <h4 className="project-grid-subtitle">
+                        {project.subJudul}
+                      </h4>
+                    )}
+                    <p className="project-grid-desc">
                       {project.deskripsi}
                     </p>
-                    <div style={{ marginTop: 'auto', paddingTop: '14px', borderTop: '1px solid var(--border-light)' }}>
-                      {project.demoUrl && (
+                    <div className="project-grid-footer">
+                      {project.demoUrl ? (
                         <a href={project.demoUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }}>
                           Buka Proyek Live ↗
                         </a>
+                      ) : (
+                        <button onClick={() => scrollToSection('contact')} className="btn btn-secondary" style={{ width: '100%', justifyContent: 'center' }}>
+                          Konsultasi Solusi Ini
+                        </button>
                       )}
                     </div>
                   </div>
@@ -677,73 +559,48 @@ const App = () => {
           {/* ===================================================================== */}
           {/* 4. EXPERIENCE & CAREER TIMELINE (Scroll Reveal) */}
           {/* ===================================================================== */}
-          <section id="experience" className="scroll-reveal" style={{ padding: '40px 0 60px' }}>
-            <div style={{ marginBottom: '28px' }}>
-              <div style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                fontSize: '0.8rem',
-                fontWeight: 700,
-                color: 'var(--accent-primary)',
-                textTransform: 'uppercase',
-                letterSpacing: '1px',
-                marginBottom: '6px'
-              }}>
-                <span style={{ width: '16px', height: '2px', background: 'var(--accent-primary)' }} />
+          <section id="experience" className="scroll-reveal experience-section">
+            <div className="section-header-block">
+              <div className="section-badge-tag">
+                <span className="section-badge-line" />
                 <span>Perjalanan Karir</span>
               </div>
-              <h2 style={{ fontSize: 'clamp(1.8rem, 4.5vw, 2.4rem)', fontWeight: 900, color: '#ffffff', letterSpacing: '-0.5px', margin: 0 }}>
+              <h2 className="section-main-heading">
                 Pengalaman Kerja & Magang
               </h2>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '20px' }}>
+            <div className="experience-list-wrapper">
               {PENGALAMAN.map((item) => (
-                <div key={item.id} className="card-base" style={{ padding: '24px' }}>
-                  <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    flexWrap: 'wrap',
-                    gap: '12px',
-                    marginBottom: '12px'
-                  }}>
+                <div key={item.id} className="card-base experience-card">
+                  <div className="experience-card-header">
                     <div>
-                      <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ffffff', margin: 0 }}>
-                        {item.posisi} <span style={{ color: 'var(--accent-primary)', fontWeight: 600 }}>@ {item.perusahaan}</span>
+                      <h3 className="experience-position-title">
+                        {item.posisi} <span className="experience-company">@ {item.perusahaan}</span>
                       </h3>
-                      <span style={{ fontSize: '0.78rem', color: 'var(--text-light)', fontWeight: 600 }}>
+                      <span className="experience-meta">
                         {item.kategori} • {item.lokasi}
                       </span>
                     </div>
 
-                    <span style={{
-                      fontSize: '0.76rem',
-                      fontWeight: 700,
-                      background: 'rgba(255, 255, 255, 0.08)',
-                      border: '1px solid rgba(255, 255, 255, 0.12)',
-                      padding: '4px 12px',
-                      borderRadius: 'var(--radius-full)',
-                      color: '#e2e8f0'
-                    }}>
+                    <span className="experience-year-badge">
                       {item.tahun}
                     </span>
                   </div>
 
-                  <p style={{ fontSize: '0.92rem', color: 'var(--text-muted)', lineHeight: '1.7', marginBottom: '16px' }}>
+                  <p className="experience-summary-text">
                     {item.ringkasan}
                   </p>
 
                   {/* Duties list */}
-                  <ul style={{ paddingLeft: '18px', color: 'var(--text-muted)', fontSize: '0.84rem', lineHeight: '1.6', marginBottom: '16px' }}>
+                  <ul className="experience-duties-list">
                     {item.tugas.map((t, tIdx) => (
-                      <li key={tIdx} style={{ marginBottom: '4px' }}>{t}</li>
+                      <li key={tIdx}>{t}</li>
                     ))}
                   </ul>
 
                   {/* Skills tags */}
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                  <div className="experience-skills-tags">
                     {item.skills.map((s, sIdx) => (
                       <span key={sIdx} className="tag-pill" style={{ fontSize: '0.72rem', padding: '3px 10px' }}>
                         {s}
@@ -758,68 +615,51 @@ const App = () => {
           {/* ===================================================================== */}
           {/* 5. ACADEMIC & EDUCATION (Scroll Reveal) */}
           {/* ===================================================================== */}
-          <section id="education" className="scroll-reveal" style={{ padding: '40px 0 60px' }}>
-            <div style={{ marginBottom: '28px' }}>
-              <div style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                fontSize: '0.8rem',
-                fontWeight: 700,
-                color: 'var(--accent-primary)',
-                textTransform: 'uppercase',
-                letterSpacing: '1px',
-                marginBottom: '6px'
-              }}>
-                <span style={{ width: '16px', height: '2px', background: 'var(--accent-primary)' }} />
+          <section id="education" className="scroll-reveal education-section">
+            <div className="section-header-block">
+              <div className="section-badge-tag">
+                <span className="section-badge-line" />
                 <span>Riwayat Pendidikan</span>
               </div>
-              <h2 style={{ fontSize: 'clamp(1.8rem, 4.5vw, 2.4rem)', fontWeight: 900, color: '#ffffff', letterSpacing: '-0.5px', margin: 0 }}>
+              <h2 className="section-main-heading">
                 Jejak Akademik & Studi
               </h2>
             </div>
 
-            <div className="card-base" style={{ padding: '26px' }}>
-              <div style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'flex-start',
-                flexWrap: 'wrap',
-                gap: '14px',
-                marginBottom: '18px'
-              }}>
+            <div className="card-base education-card">
+              <div className="education-card-header">
                 <div>
-                  <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#ffffff', margin: 0 }}>
+                  <h3 className="education-institution-name">
                     {PENDIDIKAN.institusi}
                   </h3>
-                  <p style={{ fontSize: '0.94rem', color: 'var(--accent-primary)', fontWeight: 700, marginTop: '2px' }}>
+                  <p className="education-faculty-name">
                     {PENDIDIKAN.fakultas} — {PENDIDIKAN.prodi}
                   </p>
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <div className="education-meta-badges">
                   <span className="tag-pill tag-accent" style={{ fontWeight: 700 }}>
                     {PENDIDIKAN.tahun}
                   </span>
-                  <span style={{ fontSize: '0.8rem', color: 'var(--text-light)', fontWeight: 600 }}>
+                  <span className="education-location-text">
                     {PENDIDIKAN.lokasi}
                   </span>
                 </div>
               </div>
 
-              <p style={{ fontSize: '0.94rem', color: 'var(--text-muted)', lineHeight: '1.75', marginBottom: '20px' }}>
+              <p className="education-desc-text">
                 {PENDIDIKAN.deskripsi}
               </p>
 
               {/* Focus List */}
-              <div style={{ background: 'var(--bg-subtle)', padding: '16px', borderRadius: '16px', border: '1px solid var(--border-light)' }}>
-                <h4 style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-light)', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '10px' }}>
+              <div className="education-focus-box">
+                <h4 className="education-focus-title">
                   Fokus Bidang Keilmuan:
                 </h4>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 250px), 1fr))', gap: '8px' }}>
+                <div className="education-focus-grid">
                   {PENDIDIKAN.fokusStudi.map((focus, fIdx) => (
-                    <div key={fIdx} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.84rem', color: 'var(--text-muted)' }}>
-                      <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--accent-primary)' }} />
+                    <div key={fIdx} className="education-focus-item">
+                      <span className="education-focus-dot" />
                       <span>{focus}</span>
                     </div>
                   ))}
@@ -831,86 +671,52 @@ const App = () => {
           {/* ===================================================================== */}
           {/* 6. CONTACT & COLLABORATION (Scroll Reveal) */}
           {/* ===================================================================== */}
-          <section id="contact" className="scroll-reveal" style={{ padding: '40px 0 40px' }}>
-            <div style={{ marginBottom: '28px' }}>
-              <div style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                fontSize: '0.8rem',
-                fontWeight: 700,
-                color: 'var(--accent-primary)',
-                textTransform: 'uppercase',
-                letterSpacing: '1px',
-                marginBottom: '6px'
-              }}>
-                <span style={{ width: '16px', height: '2px', background: 'var(--accent-primary)' }} />
+          <section id="contact" className="scroll-reveal contact-section">
+            <div className="section-header-block">
+              <div className="section-badge-tag">
+                <span className="section-badge-line" />
                 <span>Hubungi Saya</span>
               </div>
-              <h2 style={{ fontSize: 'clamp(1.8rem, 4.5vw, 2.4rem)', fontWeight: 900, color: '#ffffff', letterSpacing: '-0.5px', margin: 0 }}>
+              <h2 className="section-main-heading">
                 Mari Berkolaborasi & Terhubung
               </h2>
             </div>
 
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
-              gap: '24px'
-            }}>
+            <div className="contact-grid">
               {/* Direct Info Cards */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+              <div className="contact-info-col">
                 {/* Email Card */}
-                <div className="card-base" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '18px 20px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0 }}>
-                    <div style={{
-                      width: '42px',
-                      height: '42px',
-                      borderRadius: '12px',
-                      background: 'var(--accent-light)',
-                      border: '1px solid var(--accent-border)',
-                      color: 'var(--accent-primary)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center'
-                    }}>
+                <div className="card-base contact-item-card">
+                  <div className="contact-item-left">
+                    <div className="contact-item-icon-box email">
                       <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                         <rect width="20" height="16" x="2" y="4" rx="2" />
                         <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
                       </svg>
                     </div>
-                    <div style={{ minWidth: 0 }}>
-                      <span style={{ fontSize: '0.72rem', color: 'var(--text-light)', fontWeight: 700, textTransform: 'uppercase' }}>Email</span>
-                      <p style={{ fontSize: '0.9rem', fontWeight: 700, color: '#ffffff', margin: 0, wordBreak: 'break-all' }}>
+                    <div className="contact-item-details">
+                      <span className="contact-item-label">Email</span>
+                      <p className="contact-item-val email-text">
                         {PROFILE.email}
                       </p>
                     </div>
                   </div>
-                  <button onClick={handleCopyEmail} className="btn btn-secondary" style={{ padding: '6px 12px', fontSize: '0.76rem' }}>
+                  <button onClick={handleCopyEmail} className="btn btn-secondary contact-action-btn">
                     {copiedEmail ? '✓ Copied' : 'Salin'}
                   </button>
                 </div>
 
                 {/* WhatsApp Card */}
-                <div className="card-base" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '18px 20px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                    <div style={{
-                      width: '42px',
-                      height: '42px',
-                      borderRadius: '12px',
-                      background: 'var(--success-bg)',
-                      border: '1px solid var(--success-border)',
-                      color: 'var(--success)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center'
-                    }}>
+                <div className="card-base contact-item-card">
+                  <div className="contact-item-left">
+                    <div className="contact-item-icon-box whatsapp">
                       <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                       </svg>
                     </div>
-                    <div>
-                      <span style={{ fontSize: '0.72rem', color: 'var(--text-light)', fontWeight: 700, textTransform: 'uppercase' }}>WhatsApp</span>
-                      <p style={{ fontSize: '0.9rem', fontWeight: 700, color: '#ffffff', margin: 0 }}>
+                    <div className="contact-item-details">
+                      <span className="contact-item-label">WhatsApp</span>
+                      <p className="contact-item-val">
                         +62 821-2002-6900
                       </p>
                     </div>
@@ -919,49 +725,40 @@ const App = () => {
                     href={`https://wa.me/62${PROFILE.phone ? PROFILE.phone.replace(/^0/, '') : '82120026900'}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn btn-primary"
-                    style={{ padding: '6px 12px', fontSize: '0.76rem', textDecoration: 'none' }}
+                    className="btn btn-primary contact-action-btn"
                   >
                     Chat WA ↗
                   </a>
                 </div>
 
                 {/* GitHub Callout */}
-                <div className="card-base" style={{ padding: '20px', background: 'rgba(15, 23, 42, 0.7)' }}>
-                  <h4 style={{ fontSize: '1rem', fontWeight: 800, color: '#ffffff', marginBottom: '4px' }}>
+                <div className="card-base contact-github-card">
+                  <h4 className="contact-github-title">
                     Kunjungi GitHub Profile
                   </h4>
-                  <p style={{ fontSize: '0.86rem', color: 'var(--text-muted)', lineHeight: '1.55', marginBottom: '14px' }}>
+                  <p className="contact-github-desc">
                     Lihat repositori kode sumber dan eksplorasi eksperimen teknologi saya di GitHub.
                   </p>
-                  <a href={PROFILE.github} target="_blank" rel="noopener noreferrer" className="btn btn-secondary" style={{ width: '100%', justifyContent: 'center' }}>
+                  <a href={PROFILE.github} target="_blank" rel="noopener noreferrer" className="btn btn-secondary contact-github-btn">
                     Buka Profil GitHub ↗
                   </a>
                 </div>
               </div>
 
               {/* Direct Message Form */}
-              <div className="card-base" style={{ padding: '24px' }}>
-                <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#ffffff', marginBottom: '16px' }}>
+              <div className="card-base contact-form-card">
+                <h3 className="contact-form-title">
                   Kirim Pesan Langsung
                 </h3>
 
                 {isMessageSent ? (
-                  <div style={{
-                    padding: '16px',
-                    borderRadius: '12px',
-                    background: 'rgba(16, 185, 129, 0.15)',
-                    border: '1px solid rgba(16, 185, 129, 0.3)',
-                    color: '#34d399',
-                    fontSize: '0.88rem',
-                    textAlign: 'center'
-                  }}>
+                  <div className="contact-success-alert">
                     ✓ Pesan Anda telah disiapkan di aplikasi email!
                   </div>
                 ) : (
-                  <form onSubmit={handleSendMessage} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                    <div>
-                      <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-light)', marginBottom: '4px' }}>
+                  <form onSubmit={handleSendMessage} className="contact-form">
+                    <div className="form-group">
+                      <label className="form-label">
                         Nama Lengkap
                       </label>
                       <input
@@ -970,20 +767,12 @@ const App = () => {
                         value={contactForm.name}
                         onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
                         placeholder="Contoh: Budi Santoso"
-                        style={{
-                          width: '100%',
-                          padding: '10px 14px',
-                          borderRadius: '10px',
-                          background: 'rgba(255, 255, 255, 0.05)',
-                          border: '1px solid rgba(255, 255, 255, 0.12)',
-                          color: '#ffffff',
-                          fontSize: '0.88rem'
-                        }}
+                        className="form-input"
                       />
                     </div>
 
-                    <div>
-                      <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-light)', marginBottom: '4px' }}>
+                    <div className="form-group">
+                      <label className="form-label">
                         Alamat Email
                       </label>
                       <input
@@ -992,20 +781,12 @@ const App = () => {
                         value={contactForm.email}
                         onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
                         placeholder="nama@perusahaan.com"
-                        style={{
-                          width: '100%',
-                          padding: '10px 14px',
-                          borderRadius: '10px',
-                          background: 'rgba(255, 255, 255, 0.05)',
-                          border: '1px solid rgba(255, 255, 255, 0.12)',
-                          color: '#ffffff',
-                          fontSize: '0.88rem'
-                        }}
+                        className="form-input"
                       />
                     </div>
 
-                    <div>
-                      <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-light)', marginBottom: '4px' }}>
+                    <div className="form-group">
+                      <label className="form-label">
                         Pesan Anda
                       </label>
                       <textarea
@@ -1014,20 +795,11 @@ const App = () => {
                         value={contactForm.message}
                         onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
                         placeholder="Tuliskan kebutuhan proyek atau pertanyaan Anda..."
-                        style={{
-                          width: '100%',
-                          padding: '10px 14px',
-                          borderRadius: '10px',
-                          background: 'rgba(255, 255, 255, 0.05)',
-                          border: '1px solid rgba(255, 255, 255, 0.12)',
-                          color: '#ffffff',
-                          fontSize: '0.88rem',
-                          resize: 'vertical'
-                        }}
+                        className="form-input form-textarea"
                       />
                     </div>
 
-                    <button type="submit" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center', marginTop: '6px' }}>
+                    <button type="submit" className="btn btn-primary form-submit-btn">
                       <span>Kirim Pesan Sekarang ↗</span>
                     </button>
                   </form>
@@ -1037,52 +809,24 @@ const App = () => {
           </section>
 
           {/* Footer */}
-          <footer style={{
-            padding: '30px 0 10px',
-            borderTop: '1px solid rgba(255, 255, 255, 0.08)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            flexWrap: 'wrap',
-            gap: '12px'
-          }}>
-            <span style={{ fontSize: '0.82rem', color: 'var(--text-light)' }}>
+          <footer className="portfolio-footer">
+            <span className="footer-copyright">
               © {new Date().getFullYear()} Galang Ega Yudistira. Built with React & ReactBits.
             </span>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
+            <div className="footer-actions">
               <button
                 onClick={() => {
                   setShowIntro(true);
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                style={{
-                  background: 'rgba(249, 115, 22, 0.12)',
-                  border: '1px solid rgba(249, 115, 22, 0.3)',
-                  color: 'var(--accent-primary)',
-                  fontSize: '0.78rem',
-                  fontWeight: 700,
-                  padding: '5px 12px',
-                  borderRadius: 'var(--radius-full)',
-                  cursor: 'pointer',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  transition: 'all 0.2s ease'
-                }}
+                className="footer-replay-btn"
               >
                 <span>↻ Putar Ulang Intro</span>
               </button>
 
               <button
                 onClick={() => scrollToSection('hero')}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  color: 'var(--text-muted)',
-                  fontSize: '0.82rem',
-                  fontWeight: 600,
-                  cursor: 'pointer'
-                }}
+                className="footer-top-btn"
               >
                 Kembali ke Atas ↑
               </button>

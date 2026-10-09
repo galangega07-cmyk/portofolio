@@ -19,6 +19,7 @@ const FlexCarousel = ({
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const touchStartX = useRef(null);
   const containerRef = useRef(null);
 
   // Auto-advance if enabled and not hovered
@@ -42,6 +43,28 @@ const FlexCarousel = ({
     setActiveIndex((prev) => (prev + 1) % items.length);
   };
 
+  // Touch Swipe handlers for mobile
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e) => {
+    if (touchStartX.current === null) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartX.current - touchEndX;
+
+    if (Math.abs(diff) > 45) {
+      if (diff > 0) {
+        // Swipe Left -> Next
+        handleNext();
+      } else {
+        // Swipe Right -> Prev
+        handlePrev();
+      }
+    }
+    touchStartX.current = null;
+  };
+
   if (!items || items.length === 0) return null;
 
   return (
@@ -49,6 +72,8 @@ const FlexCarousel = ({
       className="flex-carousel-outer"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
       style={{
         position: 'relative',
         width: '100%',
@@ -93,7 +118,7 @@ const FlexCarousel = ({
               className={`flex-carousel-card ${isActive ? 'is-active' : 'is-collapsed'}`}
               style={{
                 flex: isActive ? '4 1 0%' : '1 1 0%',
-                minWidth: isActive ? '320px' : '90px',
+                minWidth: isActive ? 'min(100%, 300px)' : '70px',
                 borderRadius: '24px',
                 background: isActive
                   ? 'linear-gradient(145deg, rgba(17, 24, 39, 0.92) 0%, rgba(10, 15, 29, 0.95) 100%)'
@@ -328,17 +353,20 @@ const FlexCarousel = ({
                   </div>
 
                   {/* Two Column Layout on Wide Screens: Left details / Right image preview */}
-                  <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
-                    gap: '20px',
-                    alignItems: 'start',
-                    marginBottom: '16px'
-                  }}>
+                  <div
+                    className="flex-card-grid"
+                    style={{
+                      display: 'grid',
+                      gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))',
+                      gap: '20px',
+                      alignItems: 'start',
+                      marginBottom: '16px'
+                    }}
+                  >
                     {/* Left Column: Title & Description */}
                     <div>
                       <h3 style={{
-                        fontSize: 'clamp(1.35rem, 2.8vw, 1.65rem)',
+                        fontSize: 'clamp(1.25rem, 2.8vw, 1.65rem)',
                         fontWeight: 900,
                         color: '#ffffff',
                         letterSpacing: '-0.5px',
@@ -350,7 +378,7 @@ const FlexCarousel = ({
 
                       {project.subJudul && (
                         <h4 style={{
-                          fontSize: '0.92rem',
+                          fontSize: '0.88rem',
                           fontWeight: 600,
                           color: 'var(--accent-primary)',
                           marginBottom: '12px'
@@ -360,7 +388,7 @@ const FlexCarousel = ({
                       )}
 
                       <p style={{
-                        fontSize: '0.92rem',
+                        fontSize: '0.9rem',
                         color: 'var(--text-muted)',
                         lineHeight: 1.65,
                         marginBottom: '16px'
@@ -408,7 +436,7 @@ const FlexCarousel = ({
                       {project.image && (
                         <div style={{
                           width: '100%',
-                          height: '190px',
+                          height: 'clamp(150px, 24vw, 190px)',
                           borderRadius: '16px',
                           overflow: 'hidden',
                           position: 'relative',
@@ -468,17 +496,20 @@ const FlexCarousel = ({
                   </div>
 
                   {/* Bottom Action Footer */}
-                  <div style={{
-                    marginTop: 'auto',
-                    paddingTop: '16px',
-                    borderTop: '1px solid rgba(255, 255, 255, 0.08)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    flexWrap: 'wrap',
-                    gap: '12px'
-                  }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <div
+                    className="flex-card-actions"
+                    style={{
+                      marginTop: 'auto',
+                      paddingTop: '16px',
+                      borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      flexWrap: 'wrap',
+                      gap: '12px'
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
                       {project.demoUrl ? (
                         <a
                           href={project.demoUrl}
@@ -608,3 +639,4 @@ const FlexCarousel = ({
 };
 
 export default FlexCarousel;
+
